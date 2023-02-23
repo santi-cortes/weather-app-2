@@ -35,11 +35,9 @@ const Place = ({ city, isCelsius }) => {
       <section className="card_second-section-sub">
         <div className="main">
           <h2 className="card_title-sub">{`${weath?.name}, ${weath?.sys.country}`}</h2>
-          <h2 className="card_temperature">
-            {isCelsius ? `${tempe?.celsius} °C` : `${tempe?.farenheit} °F`}
-          </h2>
         </div>
-
+      </section>
+      <section className="card_second-section-sub">
         <h3 className="second-title-sub">"{weath?.weather[0].description}"</h3>
         <ul className="second_list-sub">
           <li className="second-item-sub">
@@ -58,6 +56,9 @@ const Place = ({ city, isCelsius }) => {
       <section className="card_first-section-sub">
         {weath ? <WeatherIcon weather={weath} /> : <PreCharging />}
       </section>
+      <h2 className="card_temperature">
+        {isCelsius ? `${tempe?.celsius} °C` : `${tempe?.farenheit} °F`}
+      </h2>
     </article>
   );
 };

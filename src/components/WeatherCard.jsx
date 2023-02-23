@@ -36,7 +36,7 @@ const WeatherCard = ({ weather, tempe, changeTemperature, isCelsius }) => {
         {isCelsius ? `${tempe?.celsius} °C` : `${tempe?.farenheit} °F`}
       </h2>
       <button className="card_btn" onClick={changeTemperature}>
-        {isCelsius ? "Change °F" : "change °C"}
+        {isCelsius ? "Change °F" : "Change °C"}
       </button>
     </article>
   );

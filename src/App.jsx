@@ -100,8 +100,8 @@ function App() {
 
   return (
     <div className="App" style={myStyleMain}>
-      <h1>Weather app</h1>
       <div className="content-app" style={myStyle}>
+        <h1>Weather app</h1>
         {loading || !Boolean(weather) ? (
           <PreCharging />
         ) : (
@@ -120,6 +120,9 @@ function App() {
             <WeatherForm onChangeCity={handleChangeCity} />
 
             <MapView coords={coords} />
+            <div className="credits">
+              Made by Santiago with <span>❤</span>{" "}
+            </div>
           </div>
         )}
       </div>
