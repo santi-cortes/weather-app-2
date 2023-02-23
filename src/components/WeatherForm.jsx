@@ -13,7 +13,6 @@ const WeatherForm = ({ onChangeCity }) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-
     onChangeCity(city);
   }
 

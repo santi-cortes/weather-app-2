@@ -5,11 +5,31 @@ import WeatherCard from "./components/WeatherCard";
 import PreCharging from "./components/PreCharging";
 import MapView from "./components/MapView";
 import WeatherForm from "./components/WeatherForm";
+import WeatherPlaces from "./components/WeatherPlaces";
 
 function App() {
   const [coords, setCoords] = useState();
   const [weather, setWeather] = useState();
   const [tempe, setTempe] = useState();
+  const [isCelsius, setIsCelsius] = useState(true);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    function load() {
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+      }, 900);
+    }
+    load();
+  }, []);
+
+  function load() {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 900);
+  }
 
   useEffect(() => {
     const success = (pos) => {
@@ -55,14 +75,19 @@ function App() {
         setCoords(obj);
         setTempe({ celsius, farenheit });
         setWeather(res.data);
+        load();
       })
       .catch((err) => console.log(err));
   }
+
+  console.log(coords);
 
   function handleChangeCity(city) {
     setWeather(null);
     loadInfo(city);
   }
+
+  const changeTemperature = () => setIsCelsius(!isCelsius);
 
   let myStyle = {
     background: "#333",
@@ -77,17 +102,26 @@ function App() {
     <div className="App" style={myStyleMain}>
       <h1>Weather app</h1>
       <div className="content-app" style={myStyle}>
-        {weather ? (
-          <WeatherCard
-            weather={weather}
-            tempe={tempe}
-            setWeather={setWeather}
-          />
-        ) : (
+        {loading || !Boolean(weather) ? (
           <PreCharging />
+        ) : (
+          <div className="content">
+            <div className="weather">
+              <WeatherCard
+                weather={weather}
+                tempe={tempe}
+                setWeather={setWeather}
+                changeTemperature={changeTemperature}
+                isCelsius={isCelsius}
+              />
+              <WeatherPlaces isCelsius={isCelsius} />
+            </div>
+
+            <WeatherForm onChangeCity={handleChangeCity} />
+
+            <MapView coords={coords} />
+          </div>
         )}
-        {weather ? <MapView coords={coords} /> : <PreCharging />}
-        <WeatherForm onChangeCity={handleChangeCity} />
       </div>
     </div>
   );

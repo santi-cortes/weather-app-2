@@ -1,10 +1,8 @@
 import React from "react";
 import { useState } from "react";
+import WeatherIcon from "./WeatherIcon";
 
-const WeatherCard = ({ weather, tempe }) => {
-  const [isCelsius, setIsCelsius] = useState(true);
-
-  const changeTemperature = () => setIsCelsius(!isCelsius);
+const WeatherCard = ({ weather, tempe, changeTemperature, isCelsius }) => {
   let myStyle = {
     background:
       "linear-gradient(10deg, rgb(30, 107, 221) 0%, rgb(3, 126, 255) 42%, rgb(3, 191, 255) 100%)",
@@ -31,14 +29,7 @@ const WeatherCard = ({ weather, tempe }) => {
         </ul>
       </section>
       <section className="card_first-section">
-        <img
-          className="card_icon"
-          src={
-            weather &&
-            `http://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`
-          }
-          alt=""
-        />
+        <WeatherIcon weather={weather} />
       </section>
 
       <h2 className="card_temperature">
